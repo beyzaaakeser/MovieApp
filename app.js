@@ -8,11 +8,12 @@ const search = document.getElementById('search');
 const main = document.getElementById('main');
 
 getMovies(API_URL);
-
 async function getMovies(url) {
   const res = await fetch(url);
   const data = await res.json();
-  const filteredData = Object.values(data.results).filter(item => item.poster_path);
+  const filteredData = Object.values(data.results).filter(
+    (item) => item.poster_path
+  );
   showMovies(filteredData);
 }
 
@@ -31,10 +32,8 @@ form.addEventListener('submit', (e) => {
 
 function showMovies(movies) {
   main.innerHTML = '';
-
   movies.forEach((movie) => {
     const { title, poster_path, overview, vote_average } = movie;
-
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
 
@@ -45,7 +44,9 @@ function showMovies(movies) {
         />
         <div class="movie-info">
           <h3>${title}</h3>
-          <span class="${getClassByRate(vote_average)}">${vote_average.toFixed(1)}</span>
+          <span class="${getClassByRate(vote_average)}">${vote_average.toFixed(
+      1
+    )}</span>
         </div>
         <div class="overview">
           <h3>${title} <small>overview</small></h3>
@@ -56,7 +57,6 @@ function showMovies(movies) {
     `;
     main.appendChild(movieEl);
   });
-
 }
 
 function getClassByRate(vote) {
